@@ -927,6 +927,11 @@
         * @return {boolean}
         */
         stopCallback: function(e, element) {
+            
+            var presevContext = element.attributes['keyboard-preserv-context'];
+            
+            if (!presevContext || presevContext.value == 'true')
+                return false;
 
             // if the element has the class "mousetrap" then no need to stop
             if ((' ' + element.className + ' ').indexOf(' mousetrap ') > -1) {
@@ -935,6 +940,7 @@
 
             // stop for input, select, and textarea
             return element.tagName == 'INPUT' || element.tagName == 'SELECT' || element.tagName == 'TEXTAREA' || element.isContentEditable;
+            //return false;
         },
 
         /**
