@@ -1407,7 +1407,7 @@ angular.module('angular-keyboard').directive('keyboardShortcut', function (Keybo
     restrict: 'AE',
     
     require: '?^keyboardSelectable',
-    
+    r
     link: function (scope, element, attrs, ctrl) {
       // taken from angulartics
       function isCommand(element) {
@@ -1619,13 +1619,13 @@ angular.module('angular-keyboard').service('KeyboardShortcuts', function ($timeo
     remove: function (name, keybinding) {
       var needsUnbinding = true;
       for (var i = 0; i < publicActions.length; i++) {
-        if (publicActions[i].name === name && publicActions[i].keybinding === keybinding) {
+          if (publicActions[i].name === name && (publicActions[i].keybinding === keybinding || keybinding == undefined)) {
           publicActions.splice(i, 1);
           break;
         }
       }
       for (var i = 0; i < actions.length; i++) {
-        if (actions[i].name === name && actions[i].keybinding === keybinding) {
+          if (actions[i].name === name && (actions[i].keybinding === keybinding || keybinding == undefined)) {
           actions.splice(i, 1);
           break;
         }
@@ -1633,7 +1633,7 @@ angular.module('angular-keyboard').service('KeyboardShortcuts', function ($timeo
           needsUnbinding = false;
         }
       }
-      if (needsUnbinding) {
+      if (needsUnbinding && keybinding != undefined) {
         Mousetrap.unbind(keybinding);
         
         for (var i = 0; i < actions.length; i++) {
