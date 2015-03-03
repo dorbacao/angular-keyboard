@@ -1407,7 +1407,7 @@ angular.module('angular-keyboard').directive('keyboardShortcut', function (Keybo
     restrict: 'AE',
     
     require: '?^keyboardSelectable',
-    r
+    
     link: function (scope, element, attrs, ctrl) {
       // taken from angulartics
       function isCommand(element) {
